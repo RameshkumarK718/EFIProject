@@ -71,7 +71,7 @@ jobs:
         with:
           chrome-version: stable
 
-      # 8. Verify Environment
+      # 5. Verify Environment
       - name: Verify Environment
         run: |
           echo "========================================"
@@ -91,7 +91,7 @@ jobs:
           echo "========================================"
           google-chrome --version
 
-      # 9. Verify EFI Project Files
+      # 6. Verify EFI Project Files
       - name: Verify EFI Project Files
         run: |
           echo "========================================"
@@ -119,12 +119,12 @@ jobs:
             exit 1
           fi
 
-      # 10. Validate Maven Project
+      # 7. Validate Maven Project
       - name: Validate Maven Project
         run: |
           mvn -B validate
 
-      # 11. Run EFI Automation Tests
+      # 8. Run EFI Automation Tests
       - name: Execute EFI Automation Tests
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -132,7 +132,7 @@ jobs:
           mvn -B clean test -Dtest=EFI -Dheadless=true
         continue-on-error: true
 
-      # 12. Display Test Results
+      # 9. Display Test Results
       - name: Check EFI Test Results
         if: always()
         run: |
@@ -168,23 +168,7 @@ jobs:
             echo "No screenshots found."
           fi
 
-
-
-      # 13. Run AI Evaluator
-
-      - name: Run AI Evaluator
-
-        if: always()
-
-        env:
-
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-        run: |
-
-          python engine_ai_evaluator.py
-
-/n      # 14. Commit Updated EFI Report
+      # 10. Commit Updated EFI Report
       - name: Commit and Push Updated EFI Report
         if: always()
         run: |
@@ -222,7 +206,7 @@ jobs:
 
           echo "Successfully pushed updated EFI.xlsx."
 
-      # 15. Upload EFI Execution Artifacts
+      # 11. Upload EFI Execution Artifacts
       - name: Upload EFI Execution Artifacts
         if: always()
         uses: actions/upload-artifact@v7
