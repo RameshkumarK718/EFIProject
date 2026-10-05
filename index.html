@@ -427,7 +427,6 @@
             XLSX.writeFile(workbook, "EFI_Execution_Report.xlsx");
             logToConsole("Successfully exported multi-sheet report with preserved Column J to EFI_Execution_Report.xlsx", "success");
         }
-
         function filterTable() {
             const input = document.getElementById('search-input').value.toLowerCase();
             const tbody = document.getElementById('table-body');
